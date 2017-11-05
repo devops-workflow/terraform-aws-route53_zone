@@ -1,0 +1,26 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_route53_record.record" [label = "aws_route53_record.record", shape = "box"]
+		"[root] aws_route53_record.record_alias" [label = "aws_route53_record.record_alias", shape = "box"]
+		"[root] aws_route53_zone.zone" [label = "aws_route53_zone.zone", shape = "box"]
+		"[root] provider.aws" [label = "provider.aws", shape = "diamond"]
+		"[root] aws_route53_record.record" -> "[root] aws_route53_zone.zone"
+		"[root] aws_route53_record.record" -> "[root] var.records"
+		"[root] aws_route53_record.record_alias" -> "[root] aws_route53_zone.zone"
+		"[root] aws_route53_record.record_alias" -> "[root] var.alias_records"
+		"[root] aws_route53_record.record_alias" -> "[root] var.alias_zone"
+		"[root] aws_route53_zone.zone" -> "[root] provider.aws"
+		"[root] aws_route53_zone.zone" -> "[root] var.environment"
+		"[root] aws_route53_zone.zone" -> "[root] var.name"
+		"[root] aws_route53_zone.zone" -> "[root] var.namespaced"
+		"[root] aws_route53_zone.zone" -> "[root] var.tags"
+		"[root] aws_route53_zone.zone" -> "[root] var.vpc_id"
+		"[root] output.route53_zone_id" -> "[root] aws_route53_zone.zone"
+		"[root] root" -> "[root] aws_route53_record.record"
+		"[root] root" -> "[root] aws_route53_record.record_alias"
+		"[root] root" -> "[root] output.route53_zone_id"
+	}
+}
+
